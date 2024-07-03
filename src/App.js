@@ -72,10 +72,10 @@ function App() {
     setIsAdmin(false);
   };
 
-  const deleteUser = (username) => {
+  const switchDelete = (username) => {
     const newUsers = users.map( user => {
       if (user.username === username) {
-        user.softDelete = true;
+        user.softDelete = !user.softDelete;
       }
       return user;
     });
@@ -111,18 +111,20 @@ function App() {
                   <th>Username</th>
                   <th>Password</th>
                   <th>Is Admin</th>
+                  <th>Soft Delete</th>
                   <th>Delete</th>
                 </tr> 
               </thead>
               <tbody>
-              {users.filter(user => !user.softDelete).map(user => (
+              {users.map(user => (
                 <tr key={user.username}>
                   <td>{user.username}</td>
                   <td>{user.password}</td>
                   <td>{user.isAdmin.toString()}</td>
+                  <td>{user.softDelete.toString()}</td>
                   <td>
-                    <Button variant="danger" onClick={() => deleteUser(user.username)}>
-                      Delete
+                    <Button variant="danger" onClick={() => switchDelete(user.username)}>
+                      {user.softDelete ? 'Undelete' : 'Delete'}
                     </Button>
                   </td>
                 </tr>
