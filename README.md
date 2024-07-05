@@ -1,2 +1,2 @@
-## This is the `context` branch
-## Switch to `redux` branch to see the Redux version
+## This is the `redux` branch
+## Switch to `context` branch to see the Context version
