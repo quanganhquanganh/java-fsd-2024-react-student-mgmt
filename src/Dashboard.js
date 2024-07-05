@@ -38,7 +38,6 @@ export default function Dashboard() {
           <thead>
             <tr>
               <th>Username</th>
-              <th>Password</th>
               <th>Is Admin</th>
               <th>Soft Delete</th>
               <th>Action</th>
@@ -48,7 +47,6 @@ export default function Dashboard() {
             {users.map(user => (
               <tr key={user.username}>
                 <td>{user.username}</td>
-                <td>{user.password}</td>
                 <td>{user.isAdmin.toString()}</td>
                 <td>{user.softDelete.toString()}</td>
                 <td>
