@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
-const Login = ({ onLogin }) => {
+import { UserContext } from './UserContext';
+
+const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [validated, setValidated] = useState(false);
+    const { login } = useContext(UserContext);
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -12,7 +15,7 @@ const Login = ({ onLogin }) => {
       if (form.checkValidity() === false) {
         e.stopPropagation();
       } else {
-        onLogin(username, password);
+        login(username, password);
       }
       setValidated(true);
     };
