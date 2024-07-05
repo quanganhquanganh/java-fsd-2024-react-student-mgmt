@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
-import { Route, Routes, Navigate, Link } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Login from './Login.js';
-import { UserContext } from './UserContext.js';
 import UserProfile from './UserProfile.js';
 import Dashboard from './Dashboard.js';
+import { useSelector } from 'react-redux';
+
 import 'bootstrap/dist/css/bootstrap.css'
 
 function App() {
-  const { user, isAdmin } = useContext(UserContext);
+  const { user, isAdmin } = useSelector(state => state);
 
   return (
     <div className='w-100 mx-0'>

@@ -1,11 +1,15 @@
 import React from "react";
 import { Navbar, Nav, Container, Dropdown } from 'react-bootstrap';
 import { PersonCircle } from 'react-bootstrap-icons';
-import { useContext } from "react";
-import { UserContext } from "./UserContext";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function UserProfile() {
-  const { user, logout } = useContext(UserContext);
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  }
 
   return (
     <Container fluid className="p-0">
@@ -27,7 +31,7 @@ export default function UserProfile() {
 
               <Dropdown.Menu>
                 <Dropdown.Header>{user}</Dropdown.Header>
-                <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Navbar.Collapse>

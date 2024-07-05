@@ -1,10 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Table, Navbar, Nav, Container, Dropdown } from 'react-bootstrap';
 import { PersonCircle } from 'react-bootstrap-icons';
-import { UserContext } from './UserContext';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 export default function Dashboard() {
-  const { user, users, switchDelete, logout } = useContext(UserContext);
+  const { user, users } = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' });
+  }
+
+  const handleSwitchDelete = (username) => {
+    dispatch({ type: 'SWITCH_DELETE', payload: username });
+  }
 
   return (
     <Container fluid className="p-0">
@@ -25,7 +35,7 @@ export default function Dashboard() {
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Header>{user}</Dropdown.Header>
-                <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Navbar.Collapse>
@@ -50,7 +60,7 @@ export default function Dashboard() {
                 <td>{user.isAdmin.toString()}</td>
                 <td>{user.softDelete.toString()}</td>
                 <td>
-                  <Button variant="danger" size="sm" onClick={() => switchDelete(user.username)}>
+                  <Button variant="danger" size="sm" onClick={() => handleSwitchDelete(user.username)}>
                     {user.softDelete ? 'Undelete' : 'Delete'}
                   </Button>
                 </td>
